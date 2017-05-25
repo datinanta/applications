@@ -1,0 +1,55 @@
+<div class="row">
+  <ul class="collapsible" data-collapsible="accordion">
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>
+        <a class="collection-item"><span class="new badge" data-badge-caption="Foto">{{opera.medias.length}}</span>Foto Presenti</a>
+      </div>
+      <div class="collapsible-body">
+        <div class="slider" style="width:80vw">
+          <ul class="slides">
+            <li *ngFor="let media of opera.medias">
+              <img [src]="getImageSource(media.id)">              
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Carica Foto</div>
+      <div class="collapsible-body">
+        <p>Seleziona e carica le foto</p>
+        <div class="row">
+          <div class="form-group col s6">
+            <label for="single"><a id="fakefileUpload" class="form-control waves-effect waves-light btn-large">Scegli</a></label>
+            <input id="fileUpload" multiple type="file" class="form-control" name="single" ng2FileSelect [uploader]="uploader" style="display: none">
+          </div>
+          <div class="col s6">
+            <a id="fakefileUpload" class="form-control waves-effect waves-light btn-large" (click)="uploadPhotos()">Carica</a>
+          </div>
+        </div>
+        <ul class="collection">
+          <li class="collection-item avatar" *ngFor="let item of uploader.queue">
+            <div>
+              <div>
+                <img [src]="item.alias" alt="" class="circle">
+              </div>
+              <div>
+                <span class="title">
+                        {{item.file.name}} <br>
+                    {{item.file.size/1024/1024 | number: '.2'}} MB <br>                    
+                    </span>
+                <div class="progress" *ngIf="item.isUploading">
+                  <div class="indeterminate"></div>
+                </div>
+              </div>
+              <div *ngIf="!item.isUploaded">
+                <a class="secondary-content" (click)="removeFile(item)">
+                  <i class="material-icons">delete</i></a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+</div>

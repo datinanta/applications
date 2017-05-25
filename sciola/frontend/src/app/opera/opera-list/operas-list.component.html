@@ -1,0 +1,18 @@
+<div>
+    <ul class="collection">
+        <li class="collection-item avatar" *ngFor="let opera of operas">
+            <div>
+                <div>
+                    <i class="material-icons circle">folder</i>
+                </div>
+                <div>
+                    <span class="title">
+                        {{opera.name}} <br>
+                    {{opera.description}} <br> {{opera.category}}
+                    </span>
+                </div>
+                <a class="secondary-content" (click)="gotoDetail(opera.id)"><i class="material-icons">edit</i></a>
+            </div>
+        </li>
+    </ul>
+</div>

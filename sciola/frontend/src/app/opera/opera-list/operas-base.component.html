@@ -1,0 +1,17 @@
+<div *ngIf="showMap">
+    <operas-map [operas]='operas'></operas-map>
+</div>
+<div *ngIf="!showMap">
+    <operas-list [operas]='operas'></operas-list>
+</div>
+
+<div class="fixed-action-btn" style="margin-bottom: 72px;">
+    <a class="btn-floating btn-large red" (click)="switchView()">
+        <i class="large material-icons">{{switchViewIcon()}}</i>
+    </a>
+</div>
+<div class="fixed-action-btn">
+    <a class="btn-floating btn-large red" (click)="gotoNew()">
+        <i class="large material-icons">add</i>
+    </a>
+</div>

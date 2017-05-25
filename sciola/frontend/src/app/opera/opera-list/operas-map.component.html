@@ -1,0 +1,23 @@
+<sebm-google-map [latitude]="lat" [longitude]="lng" [disableDefaultUI]="showUI" [zoom]="initZoom">
+
+  <sebm-google-map-marker *ngFor="let opera of operas" [latitude]="opera.position.lat" [longitude]="opera.position.lon" [title]="opera.name"
+    [openInfoWindow]="true">
+    <sebm-google-map-info-window [disableAutoPan]="true" [maxWidth]="300">
+      <div class="card">
+        <div class="card-image waves-effect waves-block waves-light" *ngIf="opera.medias.length > 0">          
+          <img class="activator" [src]="getOperaRepresentativeImageUrl(opera)">
+        </div>
+        <div class="card-content">
+          <span class="card-title activator grey-text text-darken-4">{{opera.name}}</span>
+          <p>Categoria: {{opera.category}}</p>
+          <p>Materiale: {{opera.material}}</p>
+          <a class="waves-effect waves-teal btn-flat left" (click)="gotoDetail(opera.id)">Dettagli</a>
+        </div>
+        <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4">{{opera.name}}<i class="material-icons right">close</i></span>
+          <p>{{opera.description}}</p>
+        </div>
+      </div>
+    </sebm-google-map-info-window>
+  </sebm-google-map-marker>
+</sebm-google-map>

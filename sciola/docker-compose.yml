@@ -1,0 +1,33 @@
+datinanta-db:
+    image: mongo:latest
+    expose:
+        - "27017"
+    ports:
+        - "27017:27017"
+    command: mongod
+
+datinanta-api:
+    image: java:latest
+    working_dir: /apps/be
+    volumes: 
+        - "/opt/server/apps/backend/iccd-1.0.jar:/apps/be/datinanta.jar"
+    ports:
+        - "8086:8086"
+    links:
+        - datinanta-db
+    command: java -jar /apps/be/datinanta.jar
+
+nginx:
+    image: nginx:latest
+    expose:
+        - "80"
+    ports:
+        - "80:80"
+        - "443:443"
+    volumes: 
+        - "/opt/server/apps/nginx/www:/usr/share/nginx/html:ro"
+        - "/opt/server/apps/nginx/conf/nginx.conf:/etc/nginx/nginx.conf:ro"
+        - "/opt/server/apps/nginx/conf/conf.d:/etc/nginx/conf.d:ro"
+        - "/opt/server/apps/nginx/certs:/etc/nginx/certs"
+    links:
+        - datinanta-api
