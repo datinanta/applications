@@ -1,0 +1,88 @@
+<div class="right switch">
+  <label>
+      Abilita modifica
+      <input type="checkbox" [(ngModel)]="canEdit">
+      <span class="lever"></span>      
+    </label>
+</div>
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s12">
+        <input [attr.disabled]="isLocked()" [(ngModel)]="opera.name" placeholder="Nome dell'opera'" id="name" name="name" type="text"
+          class="validate">
+        <label for="name">Nome dell'opera</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" [attr.disabled]="isLocked()" id="ac-category" name="ac-category" class="autocomplete" [(ngModel)]="opera.category"
+            placeholder="Categoria'">
+          <label for="ac-category">Categoria</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea [attr.disabled]="isLocked()" id="description" name="description" [(ngModel)]="opera.description" class="materialize-textarea"
+          placeholder="Descrizione"></textarea>
+        <label for="description">Descrizione</label>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="row">
+        <div class="input-field col s12">
+          <input type="text" [attr.disabled]="isLocked()" id="ac-material" name="ac-material" class="autocomplete" [(ngModel)]="opera.material"
+            placeholder="Materiale">
+          <label for="ac-material">Materiale</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s3">
+        <input [attr.disabled]="isLocked()" [(ngModel)]="opera.dimensions.width" placeholder="Larghezza" id="width" name="width"
+          type="number" class="validate">
+        <label for="name">Larghezza</label>
+      </div>
+
+      <div class="input-field col s3">
+        <input [attr.disabled]="isLocked()" [(ngModel)]="opera.dimensions.height" placeholder="Altezza" id="height" name="height"
+          type="number" class="validate">
+        <label for="name">Altezza</label>
+      </div>
+
+      <div class="input-field col s3">
+        <input [attr.disabled]="isLocked()" [(ngModel)]="opera.dimensions.depth" placeholder="Profondità" id="length" name="length"
+          type="number" class="validate">
+        <label for="name">Lunghezza</label>
+      </div>
+
+      <div class="input-field col s3">
+        <input [attr.disabled]="isLocked()" [(ngModel)]="opera.dimensions.weight" placeholder="Peso" id="height" name="height" type="number"
+          class="validate">
+        <label for="name">Peso</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix" (click)=updatePosition() style="color: rgb(255, 0, 0)">location_on</i>
+        <input disabled id="position" name="position" type="text" value="({{opera.position.lat}}, {{opera.position.lon}})" class="validate"
+          placeholder="Posizione">
+        <label for="position">Posizione</label>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="fixed-action-btn">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons" (click)=onSave()>save</i>
+  </a>
+</div>
+
+<opera-media [opera]='opera'></opera-media>
